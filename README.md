@@ -1,1 +1,1 @@
-Practice project done with React, Typescript, and UIKit
+Practice project done with React, Typescript, and UIKit and built with Parcel
