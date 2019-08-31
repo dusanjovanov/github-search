@@ -12,7 +12,7 @@
     "react-dom": "^16.9.0"
   },
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel ./public/index.html",
     "build": "parcel build ./src/index.tsx"
   }
 }
