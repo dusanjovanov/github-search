@@ -38,6 +38,7 @@ export const search = ({
 
 export const fetchRepos = (url: string) => {
   return fetch(url).then(res => {
+    if (!res.ok) throw new Error();
     return res.json().then(data => {
       return {
         totalCount: data.total_count,

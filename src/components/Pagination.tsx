@@ -20,7 +20,13 @@ const Pagination = ({ next, prev, setRepos, setIsLoading }: Props) => {
     setIsLoading(true);
     fetchRepos(next)
       .then(setRepos)
-      .then(() => setIsLoading(false));
+      .then(() => setIsLoading(false))
+      .catch(() => {
+        setIsLoading(false);
+        UIkit.modal.alert(
+          "There was an error with the request. Please try again later."
+        );
+      });
   };
 
   return (

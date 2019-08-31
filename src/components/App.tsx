@@ -5,13 +5,15 @@ import Pagination from "./Pagination";
 import SearchForm from "./SearchForm";
 import Table from "./Table";
 
+type ReposState = {
+  items: Repo[];
+  totalCount: number;
+  links: { [k: string]: string };
+  currentPage: string;
+};
+
 const App = () => {
-  const [repos, setRepos] = useState<{
-    items: Repo[];
-    totalCount: number;
-    links: { [k: string]: string };
-    currentPage: string;
-  }>({
+  const [repos, setRepos] = useState<ReposState>({
     items: [],
     totalCount: 0,
     links: {},
@@ -23,13 +25,13 @@ const App = () => {
   return (
     <div className="uk-container">
       <header>
-        <h1>Github repo search</h1>
+        <h1 style={{ marginTop: 10 }}>Github repo search</h1>
       </header>
       <SearchForm setRepos={setRepos} setIsLoading={setIsLoading} />
       <h2 style={{ marginTop: 0 }}>Results</h2>
       <div>Total Count: {formatNumber(repos.totalCount)}</div>
       <Table repos={repos.items} />
-      {repos.currentPage && (
+      {repos.items.length > 0 && repos.currentPage && (
         <div style={{ textAlign: "center" }}>
           Current Page: {repos.currentPage}
         </div>

@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { search } from "../util";
 import licences from "../licences";
 
-const SearchForm = ({ setRepos, setIsLoading }) => {
+type Props = {
+  setRepos: (repos: any) => void;
+  setIsLoading: (isLoading: boolean) => void;
+};
+
+const SearchForm = ({ setRepos, setIsLoading }: Props) => {
   const [form, setValue] = useState({
     query: "",
     stars: "",
@@ -40,7 +45,13 @@ const SearchForm = ({ setRepos, setIsLoading }) => {
       setIsLoading(true);
       search(form)
         .then(setRepos)
-        .then(() => setIsLoading(false));
+        .then(() => setIsLoading(false))
+        .catch(() => {
+          setIsLoading(false);
+          UIkit.modal.alert(
+            "There was an error with the request. Please try again later."
+          );
+        });
     }
   };
 
